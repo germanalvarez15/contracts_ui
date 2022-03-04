@@ -1,5 +1,10 @@
 <script>
     export let card;
+    const showInfo = () => {
+        console.log(card);
+        window.open(card.link, '_blank');
+
+    }
 </script>
     <div 
         class="card"
@@ -15,7 +20,7 @@
             {/each}
         </ul>
         <p>{card.tiempo}</p>
-        <button>Mas info</button>
+        <button on:click={showInfo}>Mas info</button>
     </div>
 <style>
     .card{
