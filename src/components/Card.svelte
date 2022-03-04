@@ -1,7 +1,11 @@
 <script>
     export let card;
 </script>
-    <div class="card">
+    <div 
+        class="card"
+        class:claro={card.company === 'Claro'}
+        class:antel={card.company === 'Antel'}
+    >
         <h2>{card.nombre}</h2>
         <span class="company">{card.company}</span>
         <h1>${card.precio}</h1>
@@ -16,11 +20,20 @@
 <style>
     .card{
         background-color: white;
+        border-radius: 15px;
         width: 30vw;
         height: auto;
         margin: 5px;
         padding: 6px;
         min-height: 500px;
+    }
+    .antel{
+        background-color: #ffffbb;
+        border: solid 2px #8585fd;
+    }
+    .claro{
+        background-color: #ffbbbb;
+        border: solid 2px white;
     }
     h2{
         margin-bottom: 0;

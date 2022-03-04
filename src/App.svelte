@@ -1,9 +1,19 @@
 <script>
 import Card from "./components/card.svelte";
-import Slider from "./components/Slider.svelte";
-import { onMount } from 'svelte';
+import Header from "./components/header.svelte";
 
-	const contratos = (async () => {
+	let contratos;
+
+	const handleMessage = (event) =>{
+		contratosPromise.then(data =>{
+			contratos = data.filter(c => c.precio > event.detail.start && c.precio <= event.detail.end);
+
+		},error =>{
+			console.error(error);
+		})
+	}
+
+	const contratosPromise = (async () => {
 		const response = await fetch('http://localhost:5000/contratos');
 		const responseFiltered = await response.json();
 		responseFiltered.sort(function (a, b) {
@@ -16,18 +26,18 @@ import { onMount } from 'svelte';
 			// a must be equal to b
 			return 0;
 		});
-		console.log(responseFiltered);
+		contratos = responseFiltered;
 		return responseFiltered
 	})()
 </script>
 
 <main>
-	<Slider></Slider>
-	{#await contratos}
+	<Header on:message={handleMessage}></Header>
+	{#await contratosPromise}
 		<p>...waiting</p>
 	{:then data}
 		<div class="cards-container">
-			{#each data as contr}
+			{#each contratos as contr}
 				<Card card={contr}/>
 			{/each}
 			
@@ -39,8 +49,12 @@ import { onMount } from 'svelte';
 </main>
 
 <style>
+	
 	:global(body){
-		background-color: lightgray;
+		background-color: #424242;
+	}
+	p{
+		color: white;
 	}
 	.cards-container{
 		display: flex;
