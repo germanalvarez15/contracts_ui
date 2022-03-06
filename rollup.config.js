@@ -5,6 +5,9 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
 import { sass } from 'svelte-preprocess-sass';
+import dotenv from "dotenv"
+dotenv.config()
+import replace from '@rollup/plugin-replace';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -38,14 +41,19 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+		replace({
+			isProduction: production,
+            API_URL: JSON.stringify(process.env.API_URL),
+			CONTRATOS: JSON.stringify(process.env.CONTRATOS)
+        }),
 		svelte({
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production
 			},
 			preprocess: {
-				style: sass(),
-			  },
+				style: sass()
+			},
 		}),
 		// we'll extract any component CSS out into
 		// a separate file - better for performance

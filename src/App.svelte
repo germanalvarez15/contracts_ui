@@ -3,7 +3,7 @@ import Card from "./components/card.svelte";
 import Header from "./components/header.svelte";
 
 	let contratos;
-
+	console.log(API_URL + CONTRATOS);
 	const handleMessage = (event) =>{
 		contratosPromise.then(data =>{
 			contratos = data.filter(c => c.precio > event.detail.start && c.precio <= event.detail.end);
@@ -14,7 +14,7 @@ import Header from "./components/header.svelte";
 	}
 
 	const contratosPromise = (async () => {
-		const response = await fetch('http://localhost:5000/contratos');
+		const response = await fetch(API_URL + CONTRATOS);
 		const responseFiltered = await response.json();
 		responseFiltered.sort(function (a, b) {
 			if (a.precio > b.precio) {
