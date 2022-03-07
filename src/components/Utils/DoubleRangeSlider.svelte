@@ -192,10 +192,11 @@
 		justify-content: space-around;
 		.label{
 			&.left{
-
+				margin: 0;
 			}
 			&.right{
-				
+				margin: 0;
+
 			}
 		}
 		}
