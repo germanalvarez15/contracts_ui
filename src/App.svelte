@@ -1,6 +1,6 @@
 <script>
-import Card from "./components/card.svelte";
-import Header from "./components/header.svelte";
+import Card from "./components/CardItem.svelte";
+import Header from "./components/HeaderContainer.svelte";
 
 	let contratos;
 	const handleMessage = (event) =>{
