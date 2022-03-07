@@ -1,7 +1,6 @@
 <script>
     export let card;
     const showInfo = () => {
-        console.log(card);
         window.open(card.link, '_blank');
 
     }

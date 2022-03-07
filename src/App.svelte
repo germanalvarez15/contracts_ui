@@ -3,7 +3,6 @@ import Card from "./components/card.svelte";
 import Header from "./components/header.svelte";
 
 	let contratos;
-	console.log(API_URL + CONTRATOS);
 	const handleMessage = (event) =>{
 		contratosPromise.then(data =>{
 			contratos = data.filter(c => c.precio > event.detail.start && c.precio <= event.detail.end);
