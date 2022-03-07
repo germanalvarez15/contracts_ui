@@ -21,7 +21,6 @@
 </div>
 <style>
 .main{
-    height: 10vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -33,6 +32,13 @@ img{
     width: 15%;
     height: inherit;
 }
-
+@media only screen and (max-width: 600px) {
+    .main{
+        flex-direction: column;
+    }
+    img{
+        width: 35%;
+    }
+}
 
 </style>

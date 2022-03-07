@@ -118,24 +118,24 @@
 <style type="text/scss">
 
     .header-container{
-        width: 80%;
+        width: 50%;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: flex-end;
+        justify-content: center;
         align-items: center; 
         margin-right: 2%;
         .label{
 			color: white;
-            width: 5%;
+            //width: 5%;
 			font-size: 30px;
 			&.left{
 				text-align: left;
-				margin-right: 1%;
+				margin-right: 5%;
 			}
 			&.right{
 				text-align: right;
-				margin-left: 1%;
+				margin-left: 5%;
 			}
         }
     }
@@ -185,5 +185,19 @@
 		position: absolute;
 		background-color: #34a1ff;
 		bottom: 0;
+	}
+	@media only screen and (max-width: 600px) {
+	    .header-container{
+		width: 100%;
+		justify-content: space-around;
+		.label{
+			&.left{
+
+			}
+			&.right{
+				
+			}
+		}
+		}
 	}
 </style>
