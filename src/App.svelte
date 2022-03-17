@@ -5,7 +5,7 @@ import Header from "./components/HeaderContainer.svelte";
 	let contratos;
 	const handleMessage = (event) =>{
 		contratosPromise.then(data =>{
-			contratos = data.filter(c => c.precio > event.detail.start && c.precio <= event.detail.end);
+			contratos = data.filter(c => c.price > event.detail.start && c.price <= event.detail.end);
 
 		},error =>{
 			console.error(error);
@@ -16,10 +16,10 @@ import Header from "./components/HeaderContainer.svelte";
 		const response = await fetch(API_URL + CONTRATOS);
 		const responseFiltered = await response.json();
 		responseFiltered.sort(function (a, b) {
-			if (a.precio > b.precio) {
+			if (a.price > b.price) {
 				return 1;
 			}
-			if (a.precio < b.precio) {
+			if (a.price < b.price) {
 				return -1;
 			}
 			// a must be equal to b
@@ -31,10 +31,13 @@ import Header from "./components/HeaderContainer.svelte";
 </script>
 
 <main>
-	<Header on:message={handleMessage}></Header>
 	{#await contratosPromise}
-		<p>...waiting</p>
+		<div class="loader-container">
+			<img src="https://media.giphy.com/media/tXL4FHPSnVJ0A/giphy.gif" alt="Waiting"/>
+			<p>Please be patient while we collect all the data</p>
+		</div>
 	{:then data}
+		<Header on:message={handleMessage}></Header>
 		<div class="cards-container">
 			{#each contratos as contr}
 				<Card card={contr}/>
@@ -42,7 +45,10 @@ import Header from "./components/HeaderContainer.svelte";
 			
 		</div>
 	{:catch error}
-		<p>An error occurred! {error}</p>
+		<div class="error-container">
+			<img src="https://mumbrella.com.au/wp-content/uploads/2017/10/technical_difficulties_simpsons.8d0bd724041bb166adce44e95715c12e.jpg" alt="Waiting"/>
+			<p>An error occurred! {error}</p>
+		</div>
 	{/await}
 
 </main>
@@ -62,5 +68,12 @@ import Header from "./components/HeaderContainer.svelte";
 		justify-content: space-around;
 		align-content: space-around;
 		align-items: center;
+	}
+	.loader-container,
+	.error-container{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 	}
 </style>

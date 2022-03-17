@@ -8,16 +8,17 @@
         class="card"
         class:claro={card.company === 'Claro'}
         class:antel={card.company === 'Antel'}
+        class:movistar={card.company == 'Movistar'}
     >
-        <h2>{card.nombre}</h2>
+        <h2>{card.title}</h2>
         <span class="company">{card.company}</span>
-        <h1>${card.precio}</h1>
+        <h1>${card.price}</h1>
         <ul>
-            {#each card.otros as detalle}
-                <li>{detalle}</li>
+            {#each card.details as detail}
+                <li>{detail}</li>
             {/each}
         </ul>
-        <p>{card.tiempo}</p>
+        <p>{card.period}</p>
         <button on:click={showInfo}>Mas info</button>
     </div>
 <style>
@@ -30,13 +31,17 @@
         padding: 6px;
         min-height: 500px;
     }
+    .movistar{
+        background-color: #99f9a5;
+        border: solid 3px #8585fd;
+    }
     .antel{
-        background-color: #ffffbb;
-        border: solid 2px #8585fd;
+        background-color: #c9c9f7;
+        border: solid 3px #ffff00;
     }
     .claro{
         background-color: #ffbbbb;
-        border: solid 2px white;
+        border: solid 3px white;
     }
     h2{
         margin-bottom: 0;
